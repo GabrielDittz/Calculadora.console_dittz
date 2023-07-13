@@ -1,10 +1,12 @@
-Script BD
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-Add-Migration Initial
+#nullable disable
 
-Update-database
-
-public partial class Initial : Migration
+namespace Calculadora.Migrations
+{
+    /// <inheritdoc />
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,3 +34,4 @@ public partial class Initial : Migration
                 name: "OperacoesHistorico");
         }
     }
+}

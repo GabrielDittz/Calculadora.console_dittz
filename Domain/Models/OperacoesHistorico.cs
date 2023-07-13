@@ -12,5 +12,12 @@ namespace Domain.Models
         public string Nome { get; set; } = null!;
         public float Resultado { get; set; }
         public DateTime Data { get; set; }
+
+        public void SetOperacoesHistorico(string nome, float resultado)
+        {
+            Nome = nome;
+            Resultado = resultado;  
+            Data = DateTime.Now;
+        }
     }
 }

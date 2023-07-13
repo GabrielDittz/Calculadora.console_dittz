@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Xml.Serialization;
 using Application;
+using Calculadora.Data;
+using Domain.Models;
 
 namespace Calculator
 {
@@ -55,6 +58,8 @@ namespace Calculator
 
             CriarTXT("Soma");
 
+            SalvarBanco("Soma", resultado);
+
             Console.ReadKey();
             Menu();
         }
@@ -75,6 +80,8 @@ namespace Calculator
             Console.WriteLine($"O resultado da subtração é {resultado}");
 
             CriarTXT("Subtração");
+
+            SalvarBanco("Subtração", resultado);
 
             Console.ReadKey();
             Menu();
@@ -105,6 +112,8 @@ namespace Calculator
 
             CriarTXT("Divisão");
 
+            SalvarBanco("Divisão", resultado);
+
             Console.ReadKey();
             Menu();
         }
@@ -126,6 +135,8 @@ namespace Calculator
 
             CriarTXT("Multiplicação");
 
+            SalvarBanco("Multiplicação", resultado);
+
             Console.ReadKey();
             Menu();
         }
@@ -139,6 +150,19 @@ namespace Calculator
             File.WriteAllText(path, textoArquivo);
 
             Console.WriteLine("Arquivo salvo com sucesso!");
+        }
+
+        static void SalvarBanco(string nomeOperacao, float resultado)
+        {
+            using (var context = new AppDbContext())
+            {
+                var operacao = new OperacoesHistorico();
+
+                operacao.SetOperacoesHistorico(nomeOperacao, resultado);
+
+                context.Add(operacao);
+                context.SaveChanges();
+            }
         }
     }
 }

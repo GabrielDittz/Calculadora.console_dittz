@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Application;
 
 namespace Calculator
@@ -51,6 +52,9 @@ namespace Calculator
 
             float resultado = Operacoes.Somar(v1, v2);
             Console.WriteLine($"O resultado da soma é {resultado}");
+
+            CriarTXT("Soma");
+
             Console.ReadKey();
             Menu();
         }
@@ -58,19 +62,83 @@ namespace Calculator
         static void Subtracao()
         {
             Console.Clear();
+
+            Console.WriteLine("Primeiro valor: ");
+            float v1 = float.Parse(Console.ReadLine());
+
+            Console.WriteLine("Segundo valor:");
+            float v2 = float.Parse(Console.ReadLine());
+
+            Console.WriteLine("");
+
+            float resultado = Operacoes.Subtrair(v1, v2);
+            Console.WriteLine($"O resultado da subtração é {resultado}");
+
+            CriarTXT("Subtração");
+
+            Console.ReadKey();
             Menu();
         }
 
         static void Divisao()
         {
             Console.Clear();
+
+            Console.WriteLine("Primeiro valor: ");
+            float v1 = float.Parse(Console.ReadLine());
+
+            Console.WriteLine("Segundo valor:");
+            float v2 = float.Parse(Console.ReadLine());
+
+            while (v1 == 0 || v2 == 0)
+            {
+                Console.WriteLine("Digite os valores novamente.");
+                Console.ReadKey();
+
+                Divisao();
+            }
+
+            Console.WriteLine("");
+
+            float resultado = Operacoes.Dividir(v1, v2);
+            Console.WriteLine($"O resultado da divisão é {resultado}");
+
+            CriarTXT("Divisão");
+
+            Console.ReadKey();
             Menu();
         }
 
         static void Multiplicacao()
         {
             Console.Clear();
+
+            Console.WriteLine("Primeiro valor: ");
+            float v1 = float.Parse(Console.ReadLine());
+
+            Console.WriteLine("Segundo valor:");
+            float v2 = float.Parse(Console.ReadLine());
+
+            Console.WriteLine("");
+
+            float resultado = Operacoes.Multiplicar(v1, v2);
+            Console.WriteLine($"O resultado da multiplicação é {resultado}");
+
+            CriarTXT("Multiplicação");
+
+            Console.ReadKey();
             Menu();
+        }
+
+        static void CriarTXT(string nomeOperacao)
+        {
+            string path = @"C:\Users\gabrieldittz_frwk\Documents\Estudos\PDI\Calculadora.console_dittz\ultimo_comando.txt";
+
+            string textoArquivo = $"{nomeOperacao} - {DateTime.Now}";
+
+            File.WriteAllText(path, textoArquivo);
+
+            Console.WriteLine("Arquivo salvo com sucesso!");
         }
     }
 }
